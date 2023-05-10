@@ -13,7 +13,10 @@ dataframeB/dataframeB.sum(axis=0)
 dataframeC=dataframeB.transpose()
 #logging.info(dataframeC)
 
-nmf=NMF(n_components=8,beta_loss='kullback-leibler',solver='mu')
+nTopics=int(input("How many topics?(2~10)"))
+assert 2<=nTopics<=10,"Sorry,the number of topics cannot be out of range [2,10]."
+
+nmf=NMF(n_components=nTopics,beta_loss='kullback-leibler',solver='mu')
 nt=nmf.fit_transform(dataframeC)
 
 schoolIDs=pd.read_csv('data.csv')['schoolID']
